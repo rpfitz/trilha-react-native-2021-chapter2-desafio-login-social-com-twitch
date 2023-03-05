@@ -58,12 +58,6 @@ export function UserFollowedStreamCard({ avatarUrl, streamer_login, streamer_nam
     }
   }, [isLoadingUserFollowedStreams, viewersCount])
 
-  const thumbnailProps = {
-    source: {
-      uri: thumbnailUrl && thumbnailUrl.replace('{width}x{height}', '780x435')
-    }
-  }
-
   return (
     <Container activeOpacity={0.5} onPress={() => Linking.openURL(`https://twitch.tv/${streamer_login}`)}>
       { isLoadingThumbnail ? (
@@ -85,7 +79,9 @@ export function UserFollowedStreamCard({ avatarUrl, streamer_login, streamer_nam
           />
         </Placeholder>
       ) : (
-        <Thumbnail {...thumbnailProps}>
+        <Thumbnail 
+          source={{ uri: thumbnailUrl && thumbnailUrl.replace('{width}x{height}', '780x435') }}
+          >
           <View style={{ flex: 1, padding: 12, justifyContent: 'flex-end', backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
             <ViewersCount>{formattedViewersCount} espectadores</ViewersCount>
           </View>
